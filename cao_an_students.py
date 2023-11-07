@@ -1,37 +1,32 @@
 
-students = {
-    1: {
-        "Name": "An Cao",
-        "Major": "Computer Science",
-        "Course": ["CSC1301",  "CSC2720"],
-        "Age": 24,
-        "GPA": 4.0
-    },
-    2: {
-        "Name": "Joe Doe",
-        "Major": "Math",
-        "Course": ["MATH2641", "MATH2215"],
-        "Age": 18,
-        "GPA": 3.5
-    }
-}
+import cao_an_dummy
+import datetime
+students = cao_an_dummy.student
+courses = cao_an_dummy.course
 
-#update a student information
-def update_student():
-    return print("update a student")
-
-#function to print out the a student information in the database
+#function to print a student information in the database
 def print_student(id):
     if id in students:
-        print(f'The information of student with id - {id} is: ')
-        print('Student name: {}\nStudent major: {}'.format(students[id]['Name'],students[id]['Major']))
-        print('Student course: {}\nStudent age: {}'.format(students[id]['Course'],students[id]['Age']))
-        print('Student GPA: {}\n'.format(students[id]['GPA']))
+        print(f'The information of student with {id} is: ')
+        print('Name: {}\nMajor: {}'.format(students[id]['Name'],students[id]['Major']))
+        print('Course: {}\nDate of birth: {}'.format(students[id]['Course'],students[id]['Date_Of_Birth']))
+        print('GPA: {}\n'.format(students[id]['GPA']))
     else:
         print("The id is not valid.\n")
 
+#function to print all student information in the database:
+def print_all_student():
+    for id, info in students.items():
+        print(f"Student ID: {id}")
+        print(f"\tName: {info['Name']}")
+        print(f"\tMajor: {info['Major']}")
+        print(f"\tCourses: {', '.join(info['Course'])}")
+        print(f"\tDate of birth: {info['Date_Of_Birth']}")
+        print(f"\tGPA: {info['GPA']}")
+    print("Print all student informtion.")
+    print()
 
-#function to remove a course to the database
+#function to remove all students in the database
 def remove_all_student():
     students.clear()
     print("All students are removed\n")
@@ -39,11 +34,17 @@ def remove_all_student():
 #function to remove a student to the database
 def remove_student():
     while True:
-        id=int(input("Please enter student id: "))
-        remove = students.pop(id,"Not found")
-        if remove != "Not found":
+        user=input("Please enter student id. Enter q or quit to return the remove menu:")
+        if user == "q" or user == "quit":
+            print()
             break
-    print(f"Student with id {id} is removed")
+        id = int(user)
+        remove = students.pop(id,"not found")
+        if remove != "not found":
+            print(f"Student with id {id} is removed")
+            break
+        else:
+            print(f"The {id} is {remove}. Please enter again. ")
 
 #function to add student to the database
 def add_student():
@@ -52,16 +53,26 @@ def add_student():
     name = input("Enter student's name: ")
     major = input("Enter student's major: ")
     while True:
-        course = input("Enter student's address: (enter done when finish)")
-        if course == "done":
+        course_name = input("Enter student's course. Enter done when finish: ")
+        while course_name != "done":
+            course.append(course_name)
+            course_name = input("Another course's name. Enter done when finish: ")
+        else:
             break
-    age = int(input("Enter student's age: "))
+    date = input("Enter student's date of birth (YYYY/MM/DD): ")
+    date = datetime.datetime.strptime(date,'%Y/%m/%d')
+    date = date.strftime('%Y/%m/%d')
     GPA = float(input("Enter student's GPA: "))
     students[id]={
         "Name": name,
         "Major": major,
         "Course": course,
-        "Age": age,
+        "Date_Of_Birth": date,
         "GPA": GPA
     }
-    print("A student is added")
+    print("A student is added\n")
+    print()
+
+#update a student information
+def update_student():
+    return print("update a student")
