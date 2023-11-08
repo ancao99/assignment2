@@ -75,9 +75,72 @@ def add_student():
 
 #update a student information
 def update_student():
-    id = int(input("Enter the id of student that you want to update: "))
     while True:
-        print("Student update menu: ")
-        print("1. updatecon ga")
+        id = int(input("Enter the id of student that you want to update: "))
+        if id in students:
+            print("Student update menu: ")
+            print("1. Update name (enter name or n or 1)")
+            print("2. Update major (enter major or m or 2)")
+            print("3. Update course (enter course or c or 3)")
+            print("4. Update date of birth (enter dob or d or 4)")
+            print("5. Update GPA (enter gpa or g or 5)")
+            print("6. Return to the update menu (enter quit or q or 6)")
+            option= input("Enter your option: ")
+            if option == "name" or option == "n" or option == "1":
+                update_name(id)
+            elif option == "major" or option == "m" or option == "2":
+                update_major(id)
+            elif option == "course" or option == "c" or option == "3":
+                update_course(id)
+            elif option == "date" or option == "d" or option == "4":
+                update_dob(id)
+            elif option == "gpa" or option == "g" or option == "5":
+                update_gpa(id)
+            elif option == "quit" or option == "q" or option == "6":
+                break
+            else:
+                print("The option entered is not valid. Try again")
+        else:
+            print("{id} is not valid. Enter another id.")
 
-        
+#update student name
+def update_name(id):
+    name = input("Enter the name: ")
+    students[id]["Name"] = name
+
+#update student major
+def update_major(id):
+    major = input("Enter the major: ")
+    students[id]["Major"] = major
+
+
+#update course menu
+def update_course(id):
+    print("Update course menu:")
+    print("1. Delete a course (enter delete or d or 1)")
+    print("2. Adding a course (enter add or a or 2)")
+    option = input("Enter your option: ")
+    course_code = input("Enter the course code: ")
+    if option == "remove" or option == "r" or option == "1":
+        if course_code in students[id]["Course"]:
+            students[id]["Course"].remove(course_code)
+        else:
+            print("The course code is not in the list")
+    elif option == "add" or option == "a" or option == "2":
+        if course_code in students[id]["Course"]:
+            print("Cannot add because the course is aldready in the list.")
+        else:
+            students[id]["Course"].append(course_code)
+    else:
+        print("The option is not valid.")
+
+#update student date of birth
+def update_dob(id):
+    new_dob = input("Enter the new date of birth (YYYY/MM/DD): ")
+    new_date = datetime.datetime.strptime(new_date, '%Y/%m/%d')
+    students[id]["Date_Of_Birth"] = new_date.strftime('%Y/%m/%d')
+
+#update student gpa
+def update_gpa(id):
+    gpa = input("Enter the gpa: ")
+    students[id]["GPA"] = gpa

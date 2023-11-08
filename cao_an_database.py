@@ -65,8 +65,8 @@ def remove_menu():
 
 #add menu
 def add_menu():
-    print("Add menu: ")
     while True:
+        print("Add menu: ")
         print("1. Add a student (enter as or 1)")
         print("2. Add a course (enter ac or 2)")
         print("3. Enter q or quit or 3 to comeback to the main menu")
@@ -85,6 +85,7 @@ def add_menu():
 #update menu
 def update_menu():
     while True:
+            print("Update menu: ")
             print("1. Update a student information (enter us or 1)")
             print("2. Update a course information (enter uc or 2)")
             print("3. Enter q or quit or 3 to comeback to the main menu")
