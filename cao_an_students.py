@@ -77,5 +77,7 @@ def add_student():
 def update_student():
     id = int(input("Enter the id of student that you want to update: "))
     while True:
-        print("Update menu: ")
+        print("Student update menu: ")
+        print("1. updatecon ga")
+
         
