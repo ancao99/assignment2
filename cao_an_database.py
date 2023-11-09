@@ -18,24 +18,32 @@ def print_menu():
         print("3. Print all students (enter print all students or pas or 3)")
         print("4. Print all courses (enter print all courses or pac or 4)")
         print("5. Enter q or quit or 5 to comeback to the main menu")
-        user_input = input("Enter your choice:")
-        if user_input == "1" or user_input.lower() == "ps" or user_input.lower() == "print student":
-            id = int(input("Enter student's id: "))
-            print()
-            cao_an_students.print_student(id)
-        elif user_input == "2" or user_input.lower() == "pc" or user_input.lower() == "print course":
-            course_name = input("Enter the course name: ")
-            print()
-            cao_an_courses.print_course(course_name)
-        elif user_input == "3" or user_input.lower() == "pas" or user_input.lower() == "print all students":
-            cao_an_students.print_all_student()
-        elif user_input == "4" or user_input.lower == "pac" or user_input.lower() == "print all courses":
-            cao_an_courses.print_all_course()
-        elif user_input == "5" or user_input.lower() == "q" or user_input.lower() == "quit":
-            print("Return to the main menu.\n")
-            break
-        else:
-            print("This is invalid. Please enter again")
+        try:
+            user_input = input("Enter your choice:")
+            if user_input == "1" or user_input.lower() == "ps" or user_input.lower() == "print student":
+                id = int(input("Enter student's id: "))
+                print()
+                cao_an_students.print_student(id)
+            elif user_input == "2" or user_input.lower() == "pc" or user_input.lower() == "print course":
+                course_name = input("Enter the course name: ")
+                print()
+                cao_an_courses.print_course(course_name)
+            elif user_input == "3" or user_input.lower() == "pas" or user_input.lower() == "print all students":
+                cao_an_students.print_all_student()
+            elif user_input == "4" or user_input.lower == "pac" or user_input.lower() == "print all courses":
+                cao_an_courses.print_all_course()
+            elif user_input == "5" or user_input.lower() == "q" or user_input.lower() == "quit":
+                print("Return to the main menu.\n")
+                break
+            else:
+                print("This is invalid. Please enter again")
+        except KeyboardInterrupt:
+            print("\nKeyboard interrupt error occur.")
+        except ValueError:
+            print("\nThis input is not a integer. Please enter again.")
+        except Exception as e:
+            print("error occurs.")
+        
 
 #remove menu:
 def remove_menu():
@@ -46,21 +54,26 @@ def remove_menu():
         print("3. Remove all students (enter remove all students or ras or 2)")
         print("4. Remove all courses (enter remove all courses or rac or 2)")
         print("5. Enter q or quit or 5 to comeback to the main menu")
-        user_input=input("Enter your choice:")
-        print()
-        if user_input == "1" or user_input.lower() == "remove student" or user_input.lower() == "rs":
-            cao_an_students.remove_student()
-        elif user_input == "2" or user_input.lower() == "rc" or user_input.lower() == "remove course":
-            cao_an_courses.remove_course()
-        elif user_input == "3" or user_input.lower() == "ras" or user_input.lower() == "remove all student":
-            cao_an_students.remove_all_student()
-        elif user_input == "4" or user_input.lower() == "rac" or user_input.lower() == "remve all course":
-            cao_an_courses.remove_all_course()
-        elif user_input == "5" or user_input.lower() == "q" or user_input.lower() == "quit":
-            print("Return to the main menu")
-            break
-        else:
-            print("This is invalid. Please enter again")
+        try:
+            user_input=input("Enter your choice:")
+            print()
+            if user_input == "1" or user_input.lower() == "remove student" or user_input.lower() == "rs":
+                cao_an_students.remove_student()
+            elif user_input == "2" or user_input.lower() == "rc" or user_input.lower() == "remove course":
+                cao_an_courses.remove_course()
+            elif user_input == "3" or user_input.lower() == "ras" or user_input.lower() == "remove all student":
+                cao_an_students.remove_all_student()
+            elif user_input == "4" or user_input.lower() == "rac" or user_input.lower() == "remve all course":
+                cao_an_courses.remove_all_course()
+            elif user_input == "5" or user_input.lower() == "q" or user_input.lower() == "quit":
+                print("Return to the main menu")
+                break
+            else:
+                print("This is invalid. Please enter again")
+        except KeyboardInterrupt:
+            print("Keyboard interrupt error occur.")
+        except Exception as e:
+            print("{e} occurs.")
     print()
 
 #add menu
@@ -70,25 +83,30 @@ def add_menu():
         print("1. Add a student (enter as or 1)")
         print("2. Add a course (enter ac or 2)")
         print("3. Enter q or quit or 3 to comeback to the main menu")
-        user_input=input("Enter your choice: ")
-        if user_input == "1" or user_input.lower() == "as":
-            cao_an_students.add_student()
-        elif user_input == "2" or user_input.lower() == "ac":
-            cao_an_courses.add_course()
-        elif user_input == "3" or user_input.lower() == "q" or user_input.lower() == "quit":
-            print("Return to the main menu")
-            print()
-            break
-        else:
-            print("This is invalid. Please enter again")   
-
+        try:
+            user_input=input("Enter your choice: ")
+            if user_input == "1" or user_input.lower() == "as":
+                cao_an_students.add_student()
+            elif user_input == "2" or user_input.lower() == "ac":
+                cao_an_courses.add_course()
+            elif user_input == "3" or user_input.lower() == "q" or user_input.lower() == "quit":
+                print("Return to the main menu")
+                print()
+                break
+            else:
+                print("This is invalid. Please enter again")   
+        except KeyboardInterrupt:
+            print("Keyboard interrupt error occur.")
+        except Exception as e:
+            print("{e} occurs.")
 #update menu
 def update_menu():
     while True:
-            print("Update menu: ")
-            print("1. Update a student information (enter us or 1)")
-            print("2. Update a course information (enter uc or 2)")
-            print("3. Enter q or quit or 3 to comeback to the main menu")
+        print("Update menu: ")
+        print("1. Update a student information (enter us or 1)")
+        print("2. Update a course information (enter uc or 2)")
+        print("3. Enter q or quit or 3 to comeback to the main menu")
+        try: 
             user_input=input("Enter your choice: ")
             if user_input == "1" or user_input.lower() == "us":
                 cao_an_students.update_student()
@@ -99,6 +117,10 @@ def update_menu():
                 break
             else:
                 print("This is invalid. Please enter again")
+        except KeyboardInterrupt:
+            print("Keyboard interrupt error occur.")
+        except Exception as e:
+            print("{e} occurs.")
 
 #main menu
 while True:
@@ -108,16 +130,24 @@ while True:
     print("3. Print all student or all the course or a student (enter print or p or 3)")
     print("4. Update the information (enter update or u or 4)")
     print("5. Enter quit or 5 to quit")
-    user_input=input("Enter your option: ")
-    print()
-    if user_input == "1" or user_input.lower() == "add" or user_input.lower() == "a":
-        add_menu()
-    elif user_input.lower() == "remove" or user_input.lower() == "r" or user_input == "2":
-        remove_menu()
-    elif user_input == "3" or user_input.lower() == "print" or user_input.lower() == "p":
-        print_menu()
-    elif user_input == "4" or user_input.lower() == "update" or user_input.lower() == "u":
-        update_menu()
-    elif user_input == "5" or user_input == "quit" or user_input == "q":
-        print("Thank you!! See you again soon.")
-        break
+    try:
+        user_input=input("Enter your option: ")
+        print()
+        if user_input == "1" or user_input.lower() == "add" or user_input.lower() == "a":
+            add_menu()
+        elif user_input.lower() == "remove" or user_input.lower() == "r" or user_input == "2":
+            remove_menu()
+        elif user_input == "3" or user_input.lower() == "print" or user_input.lower() == "p":
+            print_menu()
+        elif user_input == "4" or user_input.lower() == "update" or user_input.lower() == "u":
+            update_menu()
+        elif user_input == "5" or user_input == "quit" or user_input == "q":
+            print("Thank you!! See you again soon.")
+            break
+        else:
+            print("Invalid input. Please enter a valid option.")
+    except KeyboardInterrupt:
+        print("Keyboard interrupt error occur.")
+    except Exception as e:
+        print("{e} occurs.")
+    
