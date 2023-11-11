@@ -23,6 +23,7 @@ def print_menu():
         print("4. Print all courses (enter print all courses or pac or 4)")
         print("5. Enter q or quit or 5 to comeback to the main menu")
         user_input = input("Enter your choice:")
+        print()
         if user_input == "1" or user_input.lower() == "ps" or user_input.lower() == "print student":
             id = int(input("Enter student's id: "))
             cao_an_students.print_student(id)
@@ -49,7 +50,6 @@ def remove_menu():
         print("3. Remove all students (enter remove all students or ras or 2)")
         print("4. Remove all courses (enter remove all courses or rac or 2)")
         print("5. Enter q or quit or 5 to comeback to the main menu")
-        
         user_input=input("Enter your choice:")
         print()
         if user_input == "1" or user_input.lower() == "remove student" or user_input.lower() == "rs":
@@ -75,6 +75,7 @@ def add_menu():
         print("2. Add a course (enter ac or 2)")
         print("3. Enter q or quit or 3 to comeback to the main menu")
         user_input=input("Enter your choice: ")
+        print()
         if user_input == "1" or user_input.lower() == "as":
             cao_an_students.add_student()
         elif user_input == "2" or user_input.lower() == "ac":

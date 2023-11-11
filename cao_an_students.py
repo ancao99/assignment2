@@ -14,7 +14,7 @@ courses = cao_an_dummy.course
 #function to remove a student to the database
 def remove_student():
     while True:
-        user=input("Please enter student id. Enter q or quit to return the remove menu:")
+        user=input("Please enter student id. Enter q or quit to return the remove menu: ")
         if user == "q" or user == "quit":
             print()
             break
@@ -25,9 +25,11 @@ def remove_student():
                 course_infor["student"].remove(id)
         if remove != "not found":
             print(f"Student with id {id} is removed")
+            print()
             break
         else:
             print(f"The {id} is {remove}. Please enter again. ")
+            print()
 
 
 #function to print a student information in the database
@@ -91,7 +93,6 @@ def add_student():
         "GPA": GPA
     }
     print("A student is added\n")
-    print()
 
 
 
@@ -108,6 +109,7 @@ def update_student():
             print("5. Update GPA (enter gpa or g or 5)")
             print("6. Return to the update menu (enter quit or q or 6)")
             option= input("Enter your option: ")
+            print()
             if option == "name" or option == "n" or option == "1":
                 update_name(id)
                 break
@@ -151,6 +153,7 @@ def update_major(id):
 
 #update course menu
 def update_course(id):
+    print()
     print("Update course menu:")
     print("1. Delete a course (enter delete or d or 1)")
     print("2. Adding a course (enter add or a or 2)")
