@@ -1,8 +1,39 @@
 
 import cao_an_dummy
 import datetime
+import cao_an_custom_error
 students = cao_an_dummy.student
 courses = cao_an_dummy.course
+
+#function to remove a student to the database
+def remove_student():
+    while True:
+        try:
+            user=input("Please enter student id. Enter q or quit to return the remove menu:")
+            if user == "q" or user == "quit":
+                print()
+                break
+            id = int(user)
+            remove = students.pop(id,"not found")
+            for course_infor in courses.values():
+                if id in course_infor["student"]:
+                    course_infor["student"].remove(id)
+            if remove != "not found":
+                print(f"Student with id {id} is removed")
+                break
+            else:
+                print(f"The {id} is {remove}. Please enter again. ")
+        except KeyboardInterrupt:
+            cao_an_custom_error.print_KeyboardInterrupt()
+        except TypeError:
+            cao_an_custom_error.print_TypeError()
+        except ValueError:
+            cao_an_custom_error.print_ValueError()
+        except:
+            print("error.")
+        finally:
+            print()
+
 
 #function to print a student information in the database
 def print_student(id):
@@ -29,36 +60,30 @@ def print_all_student():
 #function to remove all students in the database
 def remove_all_student():
     students.clear()
+    for course_info in courses.values():
+        course_info["student"] = []
     print("All students are removed\n")
-
-#function to remove a student to the database
-def remove_student():
-    while True:
-        user=input("Please enter student id. Enter q or quit to return the remove menu:")
-        if user == "q" or user == "quit":
-            print()
-            break
-        id = int(user)
-        remove = students.pop(id,"not found")
-        if remove != "not found":
-            print(f"Student with id {id} is removed")
-            break
-        else:
-            print(f"The {id} is {remove}. Please enter again. ")
 
 #function to add student to the database
 def add_student():
     course = []
-    id = int(input("Enter the student ID: "))
+    while True:
+        id = int(input("Enter the student ID: "))
+        if id in students:
+            print("The {id} is aldready in the dictionary. Please enter again.")
+        else:
+            break
     name = input("Enter student's name: ")
     major = input("Enter student's major: ")
     while True:
-        course_name = input("Enter student's course. Enter done when finish: ")
-        while course_name != "done":
-            course.append(course_name)
-            course_name = input("Another course's name. Enter done when finish: ")
-        else:
+        course_name = input("Enter student's course. Enter 'done' when finished:(enter ABC1234 or ABCD1234) ")
+        if course_name.lower() == "done":
             break
+        elif course_name not in courses:
+            print(f"Error: Course '{course_name}' not found in the course dictionary.")
+        else:
+            course.append(course_name)
+            courses[course_name]["student"].append(id)
     date = input("Enter student's date of birth (YYYY/MM/DD): ")
     date = datetime.datetime.strptime(date,'%Y/%m/%d')
     date = date.strftime('%Y/%m/%d')
@@ -72,6 +97,8 @@ def add_student():
     }
     print("A student is added\n")
     print()
+
+
 
 #update a student information
 def update_student():
@@ -102,6 +129,7 @@ def update_student():
                 print("The option entered is not valid. Try again")
         else:
             print("{id} is not valid. Enter another id.")
+        
 
 #update student name
 def update_name(id):
@@ -121,9 +149,10 @@ def update_course(id):
     print("2. Adding a course (enter add or a or 2)")
     option = input("Enter your option: ")
     course_code = input("Enter the course code: ")
-    if option == "remove" or option == "r" or option == "1":
+    if option == "delete" or option == "d" or option == "1":
         if course_code in students[id]["Course"]:
             students[id]["Course"].remove(course_code)
+            courses[course_code]["student"].remove(id)
         else:
             print("The course code is not in the list")
     elif option == "add" or option == "a" or option == "2":
@@ -131,14 +160,16 @@ def update_course(id):
             print("Cannot add because the course is aldready in the list.")
         else:
             students[id]["Course"].append(course_code)
+            courses[course_code]["student"].append(id)
     else:
         print("The option is not valid.")
 
 #update student date of birth
 def update_dob(id):
-    new_dob = input("Enter the new date of birth (YYYY/MM/DD): ")
-    new_date = datetime.datetime.strptime(new_date, '%Y/%m/%d')
-    students[id]["Date_Of_Birth"] = new_date.strftime('%Y/%m/%d')
+    date = input("Enter student's date of birth (YYYY/MM/DD): ")
+    date = datetime.datetime.strptime(date,'%Y/%m/%d')
+    date = date.strftime('%Y/%m/%d')
+    students[id]["Date_Of_Birth"] = date
 
 #update student gpa
 def update_gpa(id):

@@ -8,6 +8,7 @@ Author: Cao An
 """
 import cao_an_students
 import cao_an_courses
+import cao_an_custom_error
 
 #print menu:
 def print_menu():
@@ -38,13 +39,12 @@ def print_menu():
             else:
                 print("This is invalid. Please enter again")
         except KeyboardInterrupt:
-            print("\nKeyboard interrupt error occur.")
+            print("\nKeyboard interrupt error occur.\n")
         except ValueError:
-            print("\nThis input is not a integer. Please enter again.")
+            print("\nThis input is not a integer. Please enter again.\n")
         except Exception as e:
-            print("error occurs.")
+            print("error occurs.\n")
         
-
 #remove menu:
 def remove_menu():
     while True:
@@ -73,7 +73,9 @@ def remove_menu():
         except KeyboardInterrupt:
             print("Keyboard interrupt error occur.")
         except Exception as e:
-            print("{e} occurs.")
+            print("error occurs.")
+        finally:
+            print()
     print()
 
 #add menu
@@ -83,22 +85,18 @@ def add_menu():
         print("1. Add a student (enter as or 1)")
         print("2. Add a course (enter ac or 2)")
         print("3. Enter q or quit or 3 to comeback to the main menu")
-        try:
-            user_input=input("Enter your choice: ")
-            if user_input == "1" or user_input.lower() == "as":
-                cao_an_students.add_student()
-            elif user_input == "2" or user_input.lower() == "ac":
-                cao_an_courses.add_course()
-            elif user_input == "3" or user_input.lower() == "q" or user_input.lower() == "quit":
-                print("Return to the main menu")
-                print()
-                break
-            else:
-                print("This is invalid. Please enter again")   
-        except KeyboardInterrupt:
-            print("Keyboard interrupt error occur.")
-        except Exception as e:
-            print("{e} occurs.")
+        user_input=input("Enter your choice: ")
+        if user_input == "1" or user_input.lower() == "as":
+            cao_an_students.add_student()
+        elif user_input == "2" or user_input.lower() == "ac":
+            cao_an_courses.add_course()
+        elif user_input == "3" or user_input.lower() == "q" or user_input.lower() == "quit":
+            print("Return to the main menu")
+            print()
+            break
+        else:
+            print("This is invalid. Please enter again")   
+
 #update menu
 def update_menu():
     while True:
@@ -147,7 +145,13 @@ while True:
         else:
             print("Invalid input. Please enter a valid option.")
     except KeyboardInterrupt:
-        print("Keyboard interrupt error occur.")
-    except Exception as e:
-        print("{e} occurs.")
+        cao_an_custom_error.print_KeyboardInterrupt()
+    except ValueError:
+        cao_an_custom_error.print_ValueError()
+    except KeyError:
+        cao_an_custom_error.print_KeyError()
+    except TypeError:
+        cao_an_custom_error.print_TypeError()
+    # except Exception as e:
+    #     print("{e} occurs.")
     
