@@ -24,9 +24,11 @@ def remove_course():
                 student_infor["Course"].remove(course_code)
         if remove != "not found":
             print(f"Course with course code {course_code} is removed.")
+            print()
             break
         else:
-            print(f"The {course_code} is {remove}. Please enter again. ")        
+            print(f"The {course_code} is {remove}. Please enter again. ")
+            print()        
  
 #function to remove a course to the database
 def remove_all_course():
@@ -42,8 +44,10 @@ def print_course(course_number):
         print('\tCourse Name: {}\n\tInstructor: {}'.format(courses[course_number]['CourseName'],courses[course_number]['Instructor']))
         print('\tCourse Location: {}\n\tDescription: {}'.format(courses[course_number]['Location'],courses[course_number]['Description']))
         print('\tStudent in the course: {}'.format(courses[course_number]['student']))
+        print()
     else:
         print("The course name does not valid.\n")
+        print()
 
 #function to print out all the course in the database
 def print_all_course():
@@ -97,7 +101,6 @@ def add_course():
         "student":student
     }
     print("A course is added\n")
-    print()
 
 #update a course information 
 def update_course():
@@ -134,7 +137,7 @@ def update_course():
                 else:
                     print("The option entered is not valid. Try again")
             else:
-                print("{course_code} is not valid. Enter another course code.")
+                print(f"{course_code} is not valid. Enter another course code.")
 
 #update course name
 def update_name(code):
@@ -145,7 +148,6 @@ def update_name(code):
 
 #update course instructor
 def update_instructor(code):
- 
     instructor = input("Enter the instructor: ")
     courses[code]["Instructor"] = instructor
     print("Update course infor")
@@ -177,6 +179,8 @@ def update_student(code):
             if id in courses[code]["student"]:
                 students[id]["Course"].remove(code)
                 courses[code]["student"].remove(id)
+                print("course infor is updated")
+                print()
                 break
             else:
                 print("The course code is not in the list")
@@ -189,6 +193,8 @@ def update_student(code):
                         courses[code]["student"].append(id)
                         students[id]["Course"].append(code)
                         print(f"course with course_code {code} added to student with id is {id}")
+                        print("course infor is updated")
+                        print()
                         break
                     else:
                         print(f"The student id '{id}' does not exist.")

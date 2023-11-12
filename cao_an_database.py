@@ -90,6 +90,7 @@ def add_menu():
 #update menu
 def update_menu():
     while True:
+        print()
         print("Update menu: ")
         print("1. Update a student information (enter us or 1)")
         print("2. Update a course information (enter uc or 2)")

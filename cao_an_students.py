@@ -67,7 +67,7 @@ def add_student():
     while True:
         id = int(input("Enter the student ID: "))
         if id in students:
-            print("The {id} is aldready in the dictionary. Please enter again.")
+            print(f"The {id} is aldready in the dictionary. Please enter again.")
         else:
             break
     name = input("Enter student's name: ")
